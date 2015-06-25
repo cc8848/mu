@@ -18,25 +18,25 @@ function reg_account()
 	begin_num = read_account();
 	for reg_num = begin_num, 12 do 
 		if (isColor( 184,464,0xffff0d, 85) and isColor( 295,464,0xffe804,85)) then --切换帐号
-			dj(184,464);
+			click(184,464);
 			yc(3);
 		end
 		zt(0x676974,"27|0|0x676974,33|-2|0x686a75,33|-9|0x676974,74|3|0x676974",659,345,899,408,90);--一键注册
 		zt( 0x676974,"2|-9|0x676974,-6|-10|0x676974,-6|12|0x676974,2|12|0x6c6e78");--帐号
 		for i =0,13 do
-			dj(900,519,0.05);--删除
+			click(900,519,0.05);--删除
 		end
 		for i =0,13 do
-			dj(900,519,0.05);--删除帐号
+			click(900,519,0.05);--删除帐号
 		end
 		yc(3);
 		Aaccount = "wen"..os.time();
 		--	dialog(Aaccount, 1);
 		yc(3);
 		inp(Aaccount);--输入帐号
-		dj(860,598,2);--点击密码，下一项
+		click(860,598,2);--点击密码，下一项
 		inp("wenhong");--输入密码
-		dj(860,598,2);--点击登录
+		click(860,598,2);--点击登录
 		create_file("account",Aaccount);
 		yc(5);
 	end
@@ -46,16 +46,16 @@ function re_reg()
 		zt(0x676974,"27|0|0x676974,33|-2|0x686a75,33|-9|0x676974,74|3|0x676974",659,345,899,408,90);--一键注册
 		zt( 0x676974,"2|-9|0x676974,-6|-10|0x676974,-6|12|0x676974,2|12|0x6c6e78");--帐号
 		for i =0,13 do
-			dj(900,519,0.05);--删除
+			click(900,519,0.05);--删除
 		end
 		for i =0,13 do
-			dj(900,519,0.05);--删除帐号
+			click(900,519,0.05);--删除帐号
 		end
 		yc(3);
 		inp(ls[dols + 0]);--输入帐号
-		dj(860,598,2);--点击密码，下一项
+		click(860,598,2);--点击密码，下一项
 		inp("wenhong");--输入密码
-		dj(860,598,2);--点击登录
+		click(860,598,2);--点击登录
 		yc(5);
 end
 --读取轮数
@@ -91,7 +91,7 @@ function file_exists(file_name)
     return f ~= nil and f:close()
 end
 --点击封装
-function dj(x,y,times,hand)
+function click(x,y,times,hand)
 	times = times or 3;
 	hand = hand or 1;
 	touchDown (hand,x,y);
@@ -99,6 +99,7 @@ function dj(x,y,times,hand)
 	touchUp(hand,x,y);
 	yc(times);
 end
+
 --延迟封装
 function yc(times)
 	mSleep(times*1000);
@@ -109,8 +110,6 @@ function tips(txt,times)
 	dialog(txt,times);
 	yc(3);
 end
-
-
 --[[封装一个单点模糊比色函数--]]
 function isColor(x,y,c,s)
     local fl,abs = math.floor,math.abs
@@ -130,7 +129,7 @@ function zt(color,pos,x0,y0,x1,y1,degree)
 	y1 = y1 or 640;
 	x,y = findMultiColorInRegionFuzzy(color,pos,degree,x0,y0,x1,y1);
 	if x ~= -1 and y ~= -1 then
-		dj(x,y);
+		click(x,y);
 		return true;
 	else
 		return false;
@@ -146,7 +145,7 @@ function zts(color,pos,x0,y0,x1,y1,degree)
 		y1 = y1 or 640;
 		x,y = findMultiColorInRegionFuzzy(color,pos,degree,x0,y0,x1,y1);
 		if x ~= -1 and y ~= -1 then
-			dj(x,y)
+			click(x,y)
 			--return true;
 			break;
 		end
@@ -159,7 +158,7 @@ function zs(color,x0,y0,x1,y1,degree)
 	degree = degree or 96;
 	x, y = findColorInRegionFuzzy(color,degree,x0,y0,x1,y1); 
 	if x ~= -1 and y ~= -1 then  --如果在指定区域找到某点符合条件
-		dj(x,y);
+		click(x,y);
 	else                         --如果找不到符合条件的点
 		return true;
 	end
@@ -170,7 +169,7 @@ function zss(color,color2,x0,y0,x1,y1,degree)
 	x, y = findColorInRegionFuzzy(color,degree,x0,y0,x1,y1);
 	x2,y2 =  findColorInRegionFuzzy(color2,degree,x0,y0,x1,y1);
 	if x ~= -1 and y ~= -1 and x2 ~= -1 and y2 ~= -1 then  --如果在指定区域找到某点符合条件
-		dj(x,y);
+		click(x,y);
 	else                         --如果找不到符合条件的点
 		return true;
 	end
@@ -214,9 +213,9 @@ function verify_two(color,color2,x0,y0,x1,y1,degree)
 	xa,ya = findColorInRegionFuzzy(color2,degree,x0,y0,x1,y1);
 	if x ~= -1 or xa ~= -1 then
 		if x ~= -1 then
-			dj(x,y);
+			click(x,y);
 		else
-			dj(xa,ya);
+			click(xa,ya);
 		end
 	else
 		return false;
@@ -241,7 +240,7 @@ function Create()
 		for i = 0, 5 do
 			if verify(0x679718,"0|1|0xbac8ab,35|-2|0xd2d8ca,35|-1|0x263114,35|0|0x5a8d04",510,397,601,428) then --重名了
 				zt(0x679718,"0|1|0xbac8ab,35|-2|0xd2d8ca,35|-1|0x263114,35|0|0x5a8d04",510,397,601,428);
-				dj(635,528);
+				click(635,528);
 				zt(0xfff430,"-1|0|0x758114,50|1|0xffa226,81|-2|0xc09817,110|8|0x0f1a01",718,510,885,549);
 			end
 		end --创建end
@@ -251,11 +250,11 @@ function Create()
 end
 --[[设置画质为流畅--]]
 function fluent()
-	dj(685,37);
-	dj(685,196);
-	dj(646,195);
-	dj(453,365);
-	dj(699,147);
+	click(685,37);
+	click(685,196);
+	click(646,195);
+	click(453,365);
+	click(699,147);
 end
 --领取奖励
 function award()
@@ -281,13 +280,13 @@ function strong()
 	while zt(0xb17655, "0|1|0x884829,-5|8|0xe4ca6b,5|9|0xffdf72,7|11|0x230909",768,530,839,600) do--点击变强
 		while zt( 0xdbe6c4, "19|0|0x5b8f03,24|-2|0xfdfcf8,42|13|0x476702,9|-4|0xa0bd6a",804,218,920,yos) do--点击提升
 			---追加
-			dj(807,232);
+			click(807,232);
 			for i = 1,5 do
 				if verify_one(0xff0000,346,400,608,455) then--追加
 					zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
 					break
 				else
-					dj(367,541);
+					click(367,541);
 				end
 			end
 			while zt( 0xd5e2bf, "10|4|0x5d8517,26|4|0xcdd9b6,40|6|0x395d01,42|0|0xd8e5c2") do--提升技能
@@ -311,7 +310,7 @@ function sale_all()
 		for ln = 1, 5 do
 			yas = 170;
 			for lns = 1, 4 do
-				dj(xas,yas,0.5);
+				click(xas,yas,0.5);
 				zt( 0x6e9d1f, "1|0|0xffffff,16|0|0x5b8e03,23|-1|0x202c0c,34|11|0x182600");--找击售
 				zt( 0x66911f, "1|0|0xfafbf9,3|0|0x548503,16|0|0x324f02,17|0|0x538303");--找使用
 				zt( 0x182507, "0|-1|0xa9ada6,0|-2|0xf3f6f2,18|-3|0x568803,17|-3|0x31342c");--找到确定(确定出售)
@@ -319,7 +318,7 @@ function sale_all()
 			end
 			xas = xas + 78;
 		end
-		dj(871,544);--整理
+		click(871,544);--整理
 	end
 end
 --检测指定文件是否存在
@@ -371,23 +370,23 @@ for mun_mu = 1,(12 - dols) do--12个帐号循环一次
 		end
 		--查找已经登录画面//or 准备登录画面
 		if (isColor( 184,464,0xffff0d, 85) and isColor( 295,464,0xffe804,85)) then
-			dj(184,464);
+			click(184,464);
 			yc(20);
 		end
 		zt(0x6b6d78,"-22|-10|0x686a75,36|-2|0x676974,36|10|0x676974,-22|12|0x6b6d78");--帐号
 		yc(2);
 		for i =0,13 do
-			dj(900,519,0.05);--删除帐号
+			click(900,519,0.05);--删除帐号
 		end
 		yc(3);
 		inp(ls[dols + 0]);--输入帐号
---		dj(900,519,0.05);--删除帐号
-		dj(860,598,2);--点击密码，下一项
+--		click(900,519,0.05);--删除帐号
+		click(860,598,2);--点击密码，下一项
 		inp("wenhong");--输入密码
 		--[[勾选自动登录--]]
 		zt( 0x419bff, "13|0|0xb5b7c2,8|-8|0x5daaff,-16|-1|0xb4b6c1,-4|6|0x007aff",57,233,596,291);--取消自动登录
 		zt( 0x419bff, "13|0|0xb5b7c2,8|-8|0x5daaff,-16|-1|0xb4b6c1,-4|6|0x007aff",57,233,596,291);--取消自动登录
-		dj(860,598,2);--点击登录
+		click(860,598,2);--点击登录
 		yc(2);
 		if verify(0x676974,"27|0|0x676974,33|-2|0x686a75,33|-9|0x676974,74|3|0x676974",659,345,899,408,90) then;
 			re_reg();
@@ -401,7 +400,7 @@ for mun_mu = 1,(12 - dols) do--12个帐号循环一次
 		zss(0xffffff,0x8db24e,645,418,778,462);--开始征程
 		--[[查找有不有xx--]]
 		if verify(0xc8b8b1, "21|-5|0x99827a,21|22|0xb77f5c,5|23|0x8a5239") then
-			dj(x,y);
+			click(x,y);
 		end
 		zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
 		zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
@@ -426,15 +425,15 @@ for mun_mu = 1,(12 - dols) do--12个帐号循环一次
 					if n == ns then
 						--[[转生--]]
 						while verify(0xfbf5dc,"2|-2|0xf5f0d7,7|6|0xf3edd4,11|6|0xfcf6dc,15|6|0xf6f0d7,19|6|0xfbf6dc,20|6|0x141412",82,3,109,18) do
-							dj(785,292);
+							click(785,292);
 							yc(2);
-							dj(402,384);
+							click(402,384);
 							yc(2);
-							dj(357,417);
+							click(357,417);
 							yc(2);
-							dj(746,540);
+							click(746,540);
 							yc(2);
-							dj(481,482);
+							click(481,482);
 							yc(1);
 							zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
 							tips("转生成功")
@@ -454,7 +453,7 @@ for mun_mu = 1,(12 - dols) do--12个帐号循环一次
 					end
 					--[[如果出现过场动画则点击跳过去]]
 					while (isColor(864,522,0xffd104,85) and isColor( 864,558, 0xffa83e,85) and isColor( 904,540,0xae671e,85)) do
-						dj(876,538);
+						click(876,538);
 						zt(0xeef3e4,"2|0|0xd1e0b7,25|0|0x89af47,32|0|0xd4e2be,35|0|0x61930b",431,309,521,352);--点击佩戴--区域有2点色--第一次带翅膀
 						zss(0xfefefe,0x5b8f03,650,512,765,552);--点击自动提升
 						yc(10);
@@ -463,14 +462,14 @@ for mun_mu = 1,(12 - dols) do--12个帐号循环一次
 						zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
 					end
 					while (isColor( 559,551,0x000000,85) and isColor(579,551,0x000000,85) and isColor(642,562,0x000000,85)) do
-						dj(884,597,0.2);
+						click(884,597,0.2);
 					end
 					yc(1);
 					zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
 					zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
 					zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
-					dj(488,302,0.5); --点一下人物
-					dj(65,266,1);--点一下任务
+					click(488,302,0.5); --点一下人物
+					click(65,266,1);--点一下任务
 				end
 			end--500--end
 			--结束角色的时候到了
@@ -478,9 +477,9 @@ for mun_mu = 1,(12 - dols) do--12个帐号循环一次
 				--准备休息,开始清理装备
 				tips("1转78级以上啦");
 				--[[清理背包--]]
-				dj(873,99);--点击地图
-				dj(56,140);--点击世界地图
-				dj(304,263);--点击冰风谷
+				click(873,99);--点击地图
+				click(56,140);--点击世界地图
+				click(304,263);--点击冰风谷
 				zt(0xe6cab5,"9|-13|0xab9892,-8|14|0x8a5239,9|13|0x7c4633,14|-8|0xaa948b");--点击xx
 				--领取奖励
 				yc(15);
@@ -488,33 +487,33 @@ for mun_mu = 1,(12 - dols) do--12个帐号循环一次
 				yc(3);
 				strong();--变强
 				--[[点击背包--]]
-				dj(707,600);--背包
+				click(707,600);--背包
 				zt(0xd2892b,"-10|16|0xf2d872,-7|16|0xc9af5d,4|16|0xf2d872,14|26|0xf29e2f",680,581,743,633);--背包
 				for hs = 1,3 do
 					zt(0xffffff, "4|0|0xf9fbf5,10|0|0xfefffe,15|0|0xe3ecd2,16|0|0x629103",550,525,653,562);--回收
-					dj(240,479);--绿装
-					dj(342,475);--蓝装
-					dj(452,476);--紫装
+					click(240,479);--绿装
+					click(342,475);--蓝装
+					click(452,476);--紫装
 					while zt(0x35c129,"5|-9|0x64ff59,6|-8|0x14ff21,8|4|0x196012,11|0|0x14a910",121,132,506,433) do --找绿点
 					end
-					dj(222,534);--立即回收
+					click(222,534);--立即回收
 					zt(0xdfe7d3, "201|129|0xf1f7e4,10|-1|0xd2d9c8,15|0|0x5d8c0a,23|3|0x5c8f03");
 					zt(0xdfe7d3, "6|0|0xb4bda6,28|0|0xd6dec9,29|0|0x8d8e8b,37|16|0x0d0f08",359,396,452,428,80);--确定回收
-					dj(402,411);
+					click(402,411);
 				end
 				zt(0xf7fbef,"8|0|0xf1f7e4,2|8|0xfefefc,3|9|0x92bf20,17|15|0xf3f6ea",550,525,653,562);--点击取消
-				dj(871,544);--整理
+				click(871,544);--整理
 				yc(5);
 				while zt(0x4bff45,"2|-4|0x64ff59,3|-4|0x1bdf21,8|5|0x14a910,5|9|0x196012,0|9|0x2d7c20,0|5|0x12a40f,-3|5|0x35c129",546,131,928,434) do;--找绿点
 					zt(0xdce6cb,"-4|8|0xa1bf6b,-3|8|0xd0d3cb,-3|9|0x222e0e,10|7|0xfbfbfa,11|7|0x4d602c",771,380,880,457);--戴装备
 				end --带装备
 				
 				----整理北包
-				dj(871,544);--整理
+				click(871,544);--整理
 				--使用钻石
 				while zt(0xd6fcff,"0|1|0x43d7fd,-20|25|0xcfc979,16|0|0x1be9fb",546,131,927,434) do--钻石保价
-					dj(710,436);
-					dj(479,456);
+					click(710,436);
+					click(479,456);
 				end
 				--绑定金币
 				while zt( 0xfff063, "0|1|0xc97110,0|2|0xccaf45,1|2|0xf9b946,-17|20|0xcfc979") do--绑金
